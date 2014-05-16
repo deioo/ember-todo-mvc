@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Ember Todo MVC</title>
+
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <script type="text/x-handlebars">
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">TODO MVC</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li>{{#link-to 'about'}}About{{/link-to}}</li>
+            <li>{{#link-to 'todos'}}Todos{{/link-to}}</li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+    <section id="todoapp">
+      <div class="container">
+        {{outlet}}
+      </div>
+    </section>
+  </script>
+
+  <script type="text/x-handlebars" id="todos">
+    <h1 class="text-center">Todos</h1>
+    <p class="lead text-center">What needs to be done?</p>
+
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="panel-title">All your todos for the day</h3>
+        </div>
+
+        <div class="panel-body">
+          <div class="form-group">
+            {{input type="text" id="new-todo" placeholder="What needs to be done?" value=newTitle action="createTodo" class="form-control input-lg"}}
+          </div>
+        </div>
+
+        <table class="table" id="todo-list">
+          {{#each itemController="todo"}}
+          <tr {{bind-attr class="isCompleted:success isCompleted:text-muted isEditing:info"}}>
+            {{#if isEditing}}
+              <td colspan="3">
+                <div class="form-group">
+                  {{edit-todo class="form-control edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
+                </div>
+              </td>
+            {{else}}
+              <td>{{input type="checkbox" checked=isCompleted disabled=isCompleted class="isCompleted:disabled"}}</td>
+              <td><span {{action "editTodo" on="doubleClick"}}>{{title}}</span></td>
+              <td class="text-right"><button class="btn btn-xs btn-warning pull-right" {{action "removeTodo"}}>x</button></td>
+            {{/if}}
+          </tr>
+          {{/each}}
+        </table>
+
+        <div class="panel-footer">
+          <span id="todo-count">
+            <strong>{{remaining}}</strong> {{inflection}} left
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="about">
+    <h1 class="text-center">About Our Todo App</h1>
+    <p class="lead text-center">Built with Ember.js and Twitter Bootstrap</p>
+  </script>
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/ember-1.5.1.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+  <script src="js/application.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/models/todo.js"></script>
+  <script src="js/controllers/todos_controller.js"></script>
+  <script src="js/controllers/todo_controller.js"></script>
+  <script src="js/views/edit_todo_view.js"></script>
+</body>
+</html>
