@@ -66,23 +66,7 @@
           </div>
         </div>
 
-        <table class="table" id="todo-list">
-          {{#each itemController="todo"}}
-          <tr {{bind-attr class="isCompleted:success isCompleted:text-muted isEditing:info"}}>
-            {{#if isEditing}}
-              <td colspan="3">
-                <div class="form-group">
-                  {{edit-todo class="form-control edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
-                </div>
-              </td>
-            {{else}}
-              <td>{{input type="checkbox" checked=isCompleted disabled=isCompleted class="isCompleted:disabled"}}</td>
-              <td><span {{action "editTodo" on="doubleClick"}}>{{title}}</span></td>
-              <td class="text-right"><button class="btn btn-xs btn-warning pull-right" {{action "removeTodo"}}>x</button></td>
-            {{/if}}
-          </tr>
-          {{/each}}
-        </table>
+        {{outlet}}
 
         <div class="panel-footer">
           <span id="todo-count">
@@ -92,6 +76,26 @@
 
       </div>
     </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="todos/index">
+    <table class="table" id="todo-list">
+      {{#each itemController="todo"}}
+      <tr {{bind-attr class="isCompleted:success isCompleted:text-muted isEditing:info"}}>
+        {{#if isEditing}}
+          <td colspan="3">
+            <div class="form-group">
+              {{edit-todo class="form-control edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
+            </div>
+          </td>
+        {{else}}
+          <td>{{input type="checkbox" checked=isCompleted disabled=isCompleted class="isCompleted:disabled"}}</td>
+          <td><span {{action "editTodo" on="doubleClick"}}>{{title}}</span></td>
+          <td class="text-right"><button class="btn btn-xs btn-warning pull-right" {{action "removeTodo"}}>x</button></td>
+        {{/if}}
+      </tr>
+      {{/each}}
+    </table>
   </script>
 
   <script type="text/x-handlebars" id="about">
