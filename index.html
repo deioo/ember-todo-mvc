@@ -63,11 +63,16 @@
               {{#link-to "todos.active" class="btn btn-default" activeClass="btn-primary active"}}Active{{/link-to}}
               {{#link-to "todos.completed" class="btn btn-default" activeClass="btn-primary active"}}Completed{{/link-to}}
             </div>
-            {{#if hasCompleted}}
-              <button {{action "clearCompleted"}} id="clear-completed" class="btn btn-warning btn-sm pull-right">
-                Clear completed ({{completed}})
+            <div class="pull-right">
+              <button {{action "toggleAllDone"}} id="toggle-all-completed" class="btn btn-sm btn-default" {{bind-attr class="allAreDone:btn-success"}}>
+                Toggle All Done
               </button>
-            {{/if}}
+              {{#if hasCompleted}}
+                <button {{action "clearCompleted"}} id="clear-completed" class="btn btn-sm btn-warning">
+                  Clear All Done ({{completed}})
+                </button>
+              {{/if}}
+            </div>
           </div>
         </div>
 
