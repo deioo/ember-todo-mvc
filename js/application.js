@@ -1,6 +1,8 @@
 window.Todos = Ember.Application.create();
 
-Todos.ApplicationAdapter = DS.FixtureAdapter.extend();
+Todos.ApplicationAdapter = DS.LSAdapter.extend({
+  namespace: 'todos-emberjs'
+});
 
 Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
