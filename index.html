@@ -58,11 +58,16 @@
 
         <div class="panel-heading">
           <div class="panel-title">
-            <div class="btn-group btn-group-sm text-center">
+            <div class="btn-group btn-group-sm">
               {{#link-to "todos.index" class="btn btn-default" activeClass="btn-primary active"}}All{{/link-to}}
               {{#link-to "todos.active" class="btn btn-default" activeClass="btn-primary active"}}Active{{/link-to}}
               {{#link-to "todos.completed" class="btn btn-default" activeClass="btn-primary active"}}Completed{{/link-to}}
             </div>
+            {{#if hasCompleted}}
+              <button {{action "clearCompleted"}} id="clear-completed" class="btn btn-warning btn-sm pull-right">
+                Clear completed ({{completed}})
+              </button>
+            {{/if}}
           </div>
         </div>
 
