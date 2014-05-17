@@ -108,7 +108,7 @@
             </div>
           </td>
         {{else}}
-          <td>{{input type="checkbox" checked=isCompleted disabled=isCompleted class="isCompleted:disabled"}}</td>
+          <td>{{input type="checkbox" checked=isCompleted}}</td>
           <td><span {{action "editTodo" on="doubleClick"}}>{{title}}</span></td>
           <td class="text-right"><button class="btn btn-xs btn-warning pull-right" {{action "removeTodo"}}>x</button></td>
         {{/if}}
