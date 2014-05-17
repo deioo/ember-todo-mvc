@@ -57,12 +57,18 @@
       <div class="panel panel-default">
 
         <div class="panel-heading">
-          <h3 class="panel-title">All your todos for the day</h3>
+          <div class="panel-title">
+            <div class="btn-group btn-group-sm text-center">
+              {{#link-to "todos.index" class="btn btn-default" activeClass="btn-primary active"}}All{{/link-to}}
+              {{#link-to "todos.active" class="btn btn-default" activeClass="btn-primary active"}}Active{{/link-to}}
+              {{#link-to "todos.completed" class="btn btn-default" activeClass="btn-primary active"}}Completed{{/link-to}}
+            </div>
+          </div>
         </div>
 
         <div class="panel-body">
           <div class="form-group">
-            {{input type="text" id="new-todo" placeholder="What needs to be done?" value=newTitle action="createTodo" class="form-control input-lg"}}
+            {{input type="text" id="new-todo" placeholder="Add new task..." value=newTitle action="createTodo" class="form-control input-lg"}}
           </div>
         </div>
 
